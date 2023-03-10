@@ -15,6 +15,9 @@ public class LogInPage extends AbstractSwagLabPage {
     @FindBy(xpath = "//*[@id = 'login-button']")
     private ExtendedWebElement logInBtn;
 
+    @FindBy(xpath = "//*[contains(text(), 'this user has been locked out')]")
+    private ExtendedWebElement lockedOutUserText;
+
     public LogInPage(WebDriver driver) {
         super(driver);
     }
@@ -30,5 +33,9 @@ public class LogInPage extends AbstractSwagLabPage {
     public ProductsPage clickLogInButton() {
         logInBtn.click();
         return new ProductsPage(getDriver());
+    }
+
+    public boolean isLockedOutUserTextPresent() {
+        return lockedOutUserText.isElementPresent();
     }
 }

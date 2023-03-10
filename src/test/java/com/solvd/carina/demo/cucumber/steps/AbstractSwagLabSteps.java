@@ -7,9 +7,9 @@ import com.solvd.carina.demo.utils.RandomUtil;
 
 public abstract class AbstractSwagLabSteps extends CucumberRunner {
 
-    public DBUserService dbUserService = new DBUserService();
+    protected DBUserService dbUserService = new DBUserService();
 
-    public DBOrderService dbOrderService = new DBOrderService();
+    protected DBOrderService dbOrderService = new DBOrderService();
 
-    public RandomUtil randomUtil = new RandomUtil();
+    protected RandomUtil randomUtil = new RandomUtil();
 }

@@ -23,7 +23,7 @@ public class UsersDAO {
         SqlSession session = MybatisUtil.getSqlSessionFactory().openSession();
         try {
             IUsersDAO iUsersDAO = session.getMapper(IUsersDAO.class);
-            return iUsersDAO.getAllUsers();
+            return iUsersDAO.getAll();
         } finally {
             session.rollback();
             session.close();

@@ -3,15 +3,12 @@ package com.solvd.carina.demo.cucumber.steps;
 import com.solvd.carina.demo.dao.models.Orders;
 import com.solvd.carina.demo.dao.models.Users;
 import com.solvd.carina.demo.gui.pages.*;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.en.*;
 import org.testng.Assert;
 
 import java.util.List;
 
-public class SwagLabOrderSteps extends AbstractSwagLabSteps {
+public class SwagLabUsersOrderSteps extends AbstractSwagLabSteps {
 
     LogInPage logInPage = null;
 
@@ -24,6 +21,7 @@ public class SwagLabOrderSteps extends AbstractSwagLabSteps {
     CheckoutOverViewPage checkoutOverViewPage = null;
 
     CheckoutCompletePage checkoutCompletePage = null;
+
 
     @Given("^I am on log in page$")
     public boolean iAmOnLogInPage() {
@@ -45,7 +43,7 @@ public class SwagLabOrderSteps extends AbstractSwagLabSteps {
     }
 
     @Then("^I click to log in button$")
-    public void iClickLogInButton() {
+    public void iClickToLogInButton() {
         productsPage = logInPage.clickLogInButton();
     }
 
@@ -55,7 +53,7 @@ public class SwagLabOrderSteps extends AbstractSwagLabSteps {
     }
 
     @Then("^I click 'Add to cart' standard user's products according date base$")
-    public void iAddToCartUserProducts() {
+    public void iClickAddToCartStandardUserProducts() {
         Users user = dbUserService.getUserByName("standard_user");
         List<Orders> orders = dbOrderService.getByUser(user);
         for (Orders order : orders) {
@@ -122,5 +120,74 @@ public class SwagLabOrderSteps extends AbstractSwagLabSteps {
     @Then("^I see complete text about order$")
     public void iSeeCompleteTextAboutOrder() {
         Assert.assertTrue(checkoutCompletePage.isCompleteTextPresent(), "Complete text is not present");
+    }
+
+    //---------- Locked out user
+
+    @Then("^I type locked out user name$")
+    public void iTypeLockedOutUserName() {
+        Users user = dbUserService.getUserByName("locked_out_user");
+        logInPage.typeUserName(user.getUserName());
+    }
+
+    @And("^I type locked out user password$")
+    public void iTypeLockedOutUserPassword() {
+        Users user = dbUserService.getUserByName("locked_out_user");
+        logInPage.typePassword(user.getPassword());
+    }
+
+    @But("^Page 'Product' should not be open$")
+    public void pageProductShouldNotBeOpened() {
+        Assert.assertFalse(productsPage.isPageOpened(3), "Product page is opened");
+    }
+
+    @And("^I see text that user is locked out$")
+    public void iSeeTextUserIsLockedOut() {
+        Assert.assertTrue(logInPage.isLockedOutUserTextPresent(), "Locked out text is not present");
+    }
+
+    //--------- Problem user
+
+    @Then("^I type problem user name$")
+    public void iTypeProblemUserName() {
+        Users user = dbUserService.getUserByName("problem_user");
+        logInPage.typeUserName(user.getUserName());
+    }
+
+    @Then("^I type problem user password$")
+    public void iTypeProblemUserPassword() {
+        Users user = dbUserService.getUserByName("problem_user");
+        logInPage.typePassword(user.getPassword());
+    }
+
+    @Then("^I click 'Add to cart' problem user's products according date base$")
+    public void iClickAddToCartProblemUserProducts() {
+        Users user = dbUserService.getUserByName("problem_user");
+        List<Orders> orders = dbOrderService.getByUser(user);
+        for (Orders order : orders) {
+            productsPage.clickAddToCartButton(order.getProduct());
+        }
+    }
+
+    @But("^In cart should not be problem user's all products$")
+    public void inCartShouldNotBeProblemUsersAllProducts() {
+        Users user = dbUserService.getUserByName("problem_user");
+        List<Orders> orders = dbOrderService.getByUser(user);
+        boolean allProductsNotPresentInCart = true; // assume all products are not present in cart
+        for (Orders order : orders) {
+            if (yourCartPage.isProductPresentInCart(order.getProduct())) {
+                allProductsNotPresentInCart = false;
+                break;
+            }
+        }
+        Assert.assertFalse(allProductsNotPresentInCart, "all products are present in cart");
+    }
+
+    @Then("^I can fill in all necessary information besides 'Last Name'$")
+    public void iCanFillAllNecessaryInfoBesideLastName() {
+        checkoutYourInformationPage.typeFirstName(randomUtil.getRandomString(4));
+        checkoutYourInformationPage.typeLastName(randomUtil.getRandomString(6));
+        checkoutYourInformationPage.typePostalCode(randomUtil.getRandomNumber(3));
+        Assert.assertEquals(checkoutYourInformationPage.getLastNameText(), "", "Last name is filled");
     }
 }

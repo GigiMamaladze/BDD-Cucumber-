@@ -23,7 +23,7 @@ public class OrdersDAO {
         SqlSession session = MybatisUtil.getSqlSessionFactory().openSession();
         try {
             IOrdersDAO iOrdersDAO = session.getMapper(IOrdersDAO.class);
-            return iOrdersDAO.getAllOrders();
+            return iOrdersDAO.getAll();
         } finally {
             session.rollback();
             session.close();

@@ -23,7 +23,7 @@ public class YourCartPage extends AbstractSwagLabPage {
     }
 
     public boolean isProductPresentInCart(String product) {
-        return productInCart.format(product).isElementPresent();
+        return productInCart.format(product).isElementPresent(2);
     }
 
     public CheckoutYourInformationPage clickCheckoutButton() {

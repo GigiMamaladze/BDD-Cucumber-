@@ -44,4 +44,8 @@ public class CheckoutYourInformationPage extends AbstractSwagLabPage {
         continueBtn.click();
         return new CheckoutOverViewPage(getDriver());
     }
+
+    public String getLastNameText() {
+        return lastNameTextField.getText();
+    }
 }

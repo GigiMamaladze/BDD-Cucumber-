@@ -6,7 +6,5 @@ import java.util.List;
 
 public interface IOrdersDAO extends IBaseDAO<Orders> {
 
-    List<Orders> getAllOrders();
-
     List<Orders> getByUserId(Long userId);
 }

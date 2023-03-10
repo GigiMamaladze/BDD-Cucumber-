@@ -14,7 +14,7 @@
         <result property="password" column="password"/>
     </resultMap>
 
-    <select id="getAllUsers" resultMap="UsersResult">
+    <select id="getAll" resultMap="UsersResult">
         SELECT * FROM users
     </select>
 
