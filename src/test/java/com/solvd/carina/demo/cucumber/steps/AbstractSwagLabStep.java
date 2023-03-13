@@ -5,7 +5,7 @@ import com.solvd.carina.demo.services.DBOrderService;
 import com.solvd.carina.demo.services.DBUserService;
 import com.solvd.carina.demo.utils.RandomUtil;
 
-public abstract class AbstractSwagLabSteps extends CucumberRunner {
+public abstract class AbstractSwagLabStep extends CucumberRunner {
 
     protected DBUserService dbUserService = new DBUserService();
 

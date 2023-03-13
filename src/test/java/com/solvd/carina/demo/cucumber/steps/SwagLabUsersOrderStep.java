@@ -9,7 +9,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class SwagLabUsersOrderSteps extends AbstractSwagLabSteps {
+public class SwagLabUsersOrderStep extends AbstractSwagLabStep {
 
     LogInPage logInPage = null;
 

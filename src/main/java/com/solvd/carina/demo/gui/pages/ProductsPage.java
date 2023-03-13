@@ -15,6 +15,7 @@ public class ProductsPage extends AbstractSwagLabPage {
 
     public ProductsPage(WebDriver driver) {
         super(driver);
+        setPageURL("https://www.saucedemo.com/inventory.html");
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(pageTitle);
     }
