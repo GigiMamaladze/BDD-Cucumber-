@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite verbose="1" name="Swag Lab web test (Cucumber)">
+    <parameter name="suiteOwner" value="qpsdemo"/>
+
+    <parameter name="jenkinsJobName" value="Cucumber-SwagLab-Test"/>
+    <parameter name="jenkinsJobType" value="web"/>
+    <parameter name="jenkinsEnvironments" value="DEMO"/>
+    <parameter name="jenkinsAutoScreenshot" value="true"/>
+
+    <test verbose="1"
+          name="Swag Lab - Web tests by cucumber">
+        <classes>
+            <class name="com.solvd.carina.demo.CucumberSwagLabTest"/>
+        </classes>
+    </test>
+
+</suite>

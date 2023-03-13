@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+        'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace="com.solvd.carina.demo.dao.interfaces.IUsersDAO">
+
+    <select id="getById" parameterType="Long" resultMap="UsersResult">
+        SELECT * FROM users WHERE id =#{id}
+    </select>
+
+    <resultMap id="UsersResult" type="Users">
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+    </resultMap>
+
+    <select id="getAll" resultMap="UsersResult">
+        SELECT * FROM users
+    </select>
+
+    <select id="getByUserName" resultMap="UsersResult">
+        SELECT * FROM users WHERE user_name = #{userName}
+    </select>
+</mapper>
