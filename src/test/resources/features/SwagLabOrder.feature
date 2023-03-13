@@ -42,8 +42,3 @@ Feature: Swag labs order test with different users
     Then I click to 'Checkout' button
     When Page 'Checkout: Your Information' should be open
     Then I can fill in all necessary information besides 'Last Name'
-
-
-
-
-
