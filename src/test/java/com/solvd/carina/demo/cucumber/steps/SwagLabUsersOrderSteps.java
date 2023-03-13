@@ -1,5 +1,6 @@
 package com.solvd.carina.demo.cucumber.steps;
 
+import com.qaprosoft.carina.core.foundation.utils.R;
 import com.solvd.carina.demo.dao.models.Orders;
 import com.solvd.carina.demo.dao.models.Users;
 import com.solvd.carina.demo.gui.pages.*;
@@ -32,13 +33,13 @@ public class SwagLabUsersOrderSteps extends AbstractSwagLabSteps {
 
     @Then("^I type standard user name$")
     public void iTypeStandardUserName() {
-        Users user = dbUserService.getUserByName("standard_user");
+        Users user = dbUserService.getUserByName(R.TESTDATA.get("standard_user"));
         logInPage.typeUserName(user.getUserName());
     }
 
     @And("^I type standard user password$")
     public void iTypeStandardPassword() {
-        Users user = dbUserService.getUserByName("standard_user");
+        Users user = dbUserService.getUserByName(R.TESTDATA.get("standard_user"));
         logInPage.typePassword(user.getPassword());
     }
 
@@ -54,7 +55,7 @@ public class SwagLabUsersOrderSteps extends AbstractSwagLabSteps {
 
     @Then("^I click 'Add to cart' standard user's products according date base$")
     public void iClickAddToCartStandardUserProducts() {
-        Users user = dbUserService.getUserByName("standard_user");
+        Users user = dbUserService.getUserByName(R.TESTDATA.get("standard_user"));
         List<Orders> orders = dbOrderService.getByUser(user);
         for (Orders order : orders) {
             productsPage.clickAddToCartButton(order.getProduct());
@@ -126,13 +127,13 @@ public class SwagLabUsersOrderSteps extends AbstractSwagLabSteps {
 
     @Then("^I type locked out user name$")
     public void iTypeLockedOutUserName() {
-        Users user = dbUserService.getUserByName("locked_out_user");
+        Users user = dbUserService.getUserByName(R.TESTDATA.get("locked_out_user"));
         logInPage.typeUserName(user.getUserName());
     }
 
     @And("^I type locked out user password$")
     public void iTypeLockedOutUserPassword() {
-        Users user = dbUserService.getUserByName("locked_out_user");
+        Users user = dbUserService.getUserByName(R.TESTDATA.get("locked_out_user"));
         logInPage.typePassword(user.getPassword());
     }
 
@@ -150,19 +151,19 @@ public class SwagLabUsersOrderSteps extends AbstractSwagLabSteps {
 
     @Then("^I type problem user name$")
     public void iTypeProblemUserName() {
-        Users user = dbUserService.getUserByName("problem_user");
+        Users user = dbUserService.getUserByName(R.TESTDATA.get("problem_user"));
         logInPage.typeUserName(user.getUserName());
     }
 
     @Then("^I type problem user password$")
     public void iTypeProblemUserPassword() {
-        Users user = dbUserService.getUserByName("problem_user");
+        Users user = dbUserService.getUserByName(R.TESTDATA.get("problem_user"));
         logInPage.typePassword(user.getPassword());
     }
 
     @Then("^I click 'Add to cart' problem user's products according date base$")
     public void iClickAddToCartProblemUserProducts() {
-        Users user = dbUserService.getUserByName("problem_user");
+        Users user = dbUserService.getUserByName(R.TESTDATA.get("problem_user"));
         List<Orders> orders = dbOrderService.getByUser(user);
         for (Orders order : orders) {
             productsPage.clickAddToCartButton(order.getProduct());
@@ -171,7 +172,7 @@ public class SwagLabUsersOrderSteps extends AbstractSwagLabSteps {
 
     @But("^In cart should not be problem user's all products$")
     public void inCartShouldNotBeProblemUsersAllProducts() {
-        Users user = dbUserService.getUserByName("problem_user");
+        Users user = dbUserService.getUserByName(R.TESTDATA.get("problem_user"));
         List<Orders> orders = dbOrderService.getByUser(user);
         boolean allProductsNotPresentInCart = true; // assume all products are not present in cart
         for (Orders order : orders) {
